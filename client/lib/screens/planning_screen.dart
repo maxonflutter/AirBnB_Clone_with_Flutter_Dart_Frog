@@ -59,7 +59,17 @@ class _PlanningScreenState extends State<PlanningScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                if (step == PlanningStep.destination) {
+                  setState(() {
+                    step = PlanningStep.guests;
+                  });
+                } else {
+                  setState(() {
+                    step = PlanningStep.destination;
+                  });
+                }
+              },
               child: Text('Clear all'),
             ),
             FilledButton.icon(
@@ -91,7 +101,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
                     return child.animate().scaleY(
                           begin: 0.0,
                           end: 1.0,
-                          curve: Curves.fastLinearToSlowEaseIn,
+                          curve: Curves.linear,
                           alignment: step == PlanningStep.destination
                               ? Alignment.topCenter
                               : Alignment.bottomCenter,
