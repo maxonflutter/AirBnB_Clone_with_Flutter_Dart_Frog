@@ -2,18 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 class PropertyTypeList extends StatefulWidget {
-  const PropertyTypeList({super.key});
+  const PropertyTypeList({Key? key}) : super(key: key);
 
   @override
   State<PropertyTypeList> createState() => _PropertyTypeListState();
 }
 
 class _PropertyTypeListState extends State<PropertyTypeList> {
-  int index = 0;
+  int selectedIndex = 0;
+  final List<Map<String, dynamic>> propertyTypes = [
+    {'type': 'Hotel', 'icon': Icons.hotel},
+    {'type': 'Apartment', 'icon': Icons.apartment},
+    {'type': 'Bed and Breakfast', 'icon': Icons.bedroom_child},
+    {'type': 'Villa', 'icon': Icons.villa},
+    // Add more property types as needed
+  ];
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.sizeOf(context);
+    final size = MediaQuery.of(context).size;
     final textTheme = Theme.of(context).textTheme;
 
     return SizedBox(
@@ -21,7 +28,7 @@ class _PropertyTypeListState extends State<PropertyTypeList> {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
-        itemCount: 10,
+        itemCount: propertyTypes.length,
         itemBuilder: (context, index) {
           return Container(
             width: size.width * 0.2,
@@ -33,22 +40,22 @@ class _PropertyTypeListState extends State<PropertyTypeList> {
             child: GestureDetector(
               onTap: () {
                 setState(() {
-                  this.index = index;
+                  selectedIndex = index;
                 });
               },
               child: Column(
                 children: [
-                  const Icon(Icons.location_on_outlined),
+                  Icon(propertyTypes[index]['icon']),
                   const SizedBox(height: 2.0),
                   Text(
-                    'Anywhere',
-                    style: textTheme.bodySmall!.copyWith(
-                      fontWeight: index == this.index
+                    propertyTypes[index]['type'],
+                    style: textTheme.bodyText1!.copyWith(
+                      fontWeight: index == selectedIndex
                           ? FontWeight.bold
                           : FontWeight.normal,
                     ),
                   ),
-                  index == this.index
+                  index == selectedIndex
                       ? Container(
                           margin: const EdgeInsets.only(top: 8.0),
                           height: 2.0,
