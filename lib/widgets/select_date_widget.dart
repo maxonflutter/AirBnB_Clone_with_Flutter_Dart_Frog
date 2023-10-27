@@ -3,7 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
-import '../screens/planning_screen.dart';
+import '../models/booking_steps.dart';
 
 class SelectDateWidget extends StatelessWidget {
   const SelectDateWidget({
@@ -12,7 +12,7 @@ class SelectDateWidget extends StatelessWidget {
     required this.height,
   });
 
-  final PlanningStep step;
+  final BookingSteps step;
   final double height;
 
   @override
@@ -20,14 +20,14 @@ class SelectDateWidget extends StatelessWidget {
     return Card(
       clipBehavior: Clip.antiAlias,
       child: AnimatedContainer(
-          height: step == PlanningStep.date ? height : 60,
+          height: step == BookingSteps.selectDate ? height : 60,
           width: double.infinity,
           padding: const EdgeInsets.symmetric(
             vertical: 16.0,
             horizontal: 16.0,
           ),
-          duration: const Duration(milliseconds: 200),
-          child: step == PlanningStep.date
+          duration: const Duration(milliseconds: 300),
+          child: step == BookingSteps.selectDate
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -74,7 +74,7 @@ class SelectDateWidget extends StatelessWidget {
                       children: [
                         TextButton(
                           onPressed: () {
-                            if (step == PlanningStep.destination) {
+                            if (step == BookingSteps.selectDestination) {
                             } else {}
                           },
                           child: const Text('Skip'),
@@ -95,8 +95,8 @@ class SelectDateWidget extends StatelessWidget {
                     ),
                   ],
                 )
-                  .animate(delay: const Duration(milliseconds: 200))
-                  .fadeIn(duration: const Duration(milliseconds: 200))
+                  .animate(delay: const Duration(milliseconds: 300))
+                  .fadeIn(duration: const Duration(milliseconds: 300))
               : Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

@@ -1,7 +1,9 @@
-import '../screens/home_screen.dart';
-import '../screens/planning_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
+import '../screens/booking_details_screen.dart';
+import '../screens/home_screen.dart';
+import '../shared/colors.dart';
 
 class AppRouter {
   late final GoRouter router = GoRouter(
@@ -14,181 +16,53 @@ class AppRouter {
         },
       ),
       GoRoute(
-        name: 'planning',
-        path: '/planning',
-        builder: (BuildContext context, GoRouterState state) {
-          return const PlanningScreen();
+        name: 'booking-details',
+        path: '/booking-details',
+        pageBuilder: (context, state) {
+          return CustomTransitionPage<void>(
+            key: state.pageKey,
+            opaque: false,
+            barrierColor: appBlack.withOpacity(0.5),
+            transitionDuration: const Duration(milliseconds: 300),
+            reverseTransitionDuration: const Duration(milliseconds: 300),
+            child: const BookingDetailsScreen(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return child;
+            },
+          );
         },
-        // pageBuilder: (context, state) =>
-        // NoTransitionPage<void>(
-        //   child:
-        //     HeroControllerScope(
-        //   controller: MaterialApp.createMaterialHeroController(),
-        //   child: const PlanningScreen(),
-        // ),
-        // ),
       ),
     ],
   );
 }
 
-// /// The route configuration.
-// final GoRouter _router = GoRouter(
-//   routes: <RouteBase>[
-//     GoRoute(
-//       path: '/',
-//       builder: (BuildContext context, GoRouterState state) {
-//         return const HomeScreen();
-//       },
-//       routes: <RouteBase>[
-//         GoRoute(
-//           path: 'details',
-//           pageBuilder: (BuildContext context, GoRouterState state) {
-//             return CustomTransitionPage<void>(
-//               key: state.pageKey,
-//               child: const DetailsScreen(),
-//               transitionDuration: const Duration(milliseconds: 150),
-//               transitionsBuilder: (BuildContext context,
-//                   Animation<double> animation,
-//                   Animation<double> secondaryAnimation,
-//                   Widget child) {
-//                 // Change the opacity of the screen using a Curve based on the the animation's
-//                 // value
-//                 return FadeTransition(
-//                   opacity:
-//                       CurveTween(curve: Curves.easeInOut).animate(animation),
-//                   child: child,
-//                 );
-//               },
-//             );
-//           },
-//         ),
-//         GoRoute(
-//           path: 'dismissible-details',
-//           pageBuilder: (BuildContext context, GoRouterState state) {
-//             return CustomTransitionPage<void>(
-//               key: state.pageKey,
-//               child: const DismissibleDetails(),
-//               barrierDismissible: true,
-//               barrierColor: Colors.black38,
-//               opaque: false,
-//               transitionDuration: Duration.zero,
-//               transitionsBuilder: (_, __, ___, Widget child) => child,
-//             );
-//           },
-//         ),
-//         GoRoute(
-//           path: 'custom-reverse-transition-duration',
-//           pageBuilder: (BuildContext context, GoRouterState state) {
-//             return CustomTransitionPage<void>(
-//               key: state.pageKey,
-//               child: const DetailsScreen(),
-//               barrierDismissible: true,
-//               barrierColor: Colors.black38,
-//               opaque: false,
-//               transitionDuration: const Duration(milliseconds: 500),
-//               reverseTransitionDuration: const Duration(milliseconds: 200),
-//               transitionsBuilder: (BuildContext context,
-//                   Animation<double> animation,
-//                   Animation<double> secondaryAnimation,
-//                   Widget child) {
-//                 return FadeTransition(
-//                   opacity: animation,
-//                   child: child,
-//                 );
-//               },
-//             );
-//           },
-//         ),
-//       ],
+
+// Navigator.push(
+//   context,
+//   PageRouteBuilder(
+//     opaque: false,
+//     barrierColor: appBlack.withOpacity(0.5),
+//     transitionDuration: const Duration(milliseconds: 300),
+//     reverseTransitionDuration: const Duration(
+//       milliseconds: 300,
 //     ),
-//   ],
-// );
-
-// /// The main app.
-// class MyApp extends StatelessWidget {
-//   /// Constructs a [MyApp]
-//   const MyApp({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp.router(
-//       routerConfig: _router,
-//     );
-//   }
-// }
-
-// /// The home screen
-// class HomeScreen extends StatelessWidget {
-//   /// Constructs a [HomeScreen]
-//   const HomeScreen({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: const Text('Home Screen')),
-//       body: Center(
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: <Widget>[
-//             ElevatedButton(
-//               onPressed: () => context.go('/details'),
-//               child: const Text('Go to the Details screen'),
-//             ),
-//             const SizedBox(height: 48),
-//             ElevatedButton(
-//               onPressed: () => context.go('/dismissible-details'),
-//               child: const Text('Go to the Dismissible Details screen'),
-//             ),
-//             const SizedBox(height: 48),
-//             ElevatedButton(
-//               onPressed: () =>
-//                   context.go('/custom-reverse-transition-duration'),
-//               child: const Text(
-//                 'Go to the Custom Reverse Transition Duration Screen',
-//               ),
-//             ),
-//           ],
+//     transitionsBuilder: (
+//       context,
+//       animation,
+//       secondaryAnimation,
+//       child,
+//     ) {
+//       return child;
+//     },
+//     pageBuilder: (context, animation1, animation2) {
+//       return BackdropFilter(
+//         filter: ImageFilter.blur(
+//           sigmaX: 8.0,
+//           sigmaY: 8.0,
 //         ),
-//       ),
-//     );
-//   }
-// }
-
-// /// The details screen
-// class DetailsScreen extends StatelessWidget {
-//   /// Constructs a [DetailsScreen]
-//   const DetailsScreen({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: const Text('Details Screen')),
-//       body: Center(
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: <Widget>[
-//             ElevatedButton(
-//               onPressed: () => context.go('/'),
-//               child: const Text('Go back to the Home screen'),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// /// The dismissible details screen
-// class DismissibleDetails extends StatelessWidget {
-//   /// Constructs a [DismissibleDetails]
-//   const DismissibleDetails({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Padding(
-//       padding: EdgeInsets.all(48),
-//       child: ColoredBox(color: Colors.red),
-//     );
-//   }
-// }
+//         child: const BookingDetailsScreen(),
+//       );
+//     },
+//   ),
+// ),

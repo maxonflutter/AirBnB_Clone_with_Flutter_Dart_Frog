@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-class AccomodationType extends StatefulWidget {
-  const AccomodationType({
+class PropertyType extends StatefulWidget {
+  const PropertyType({
     super.key,
   });
 
   @override
-  State<AccomodationType> createState() => _AccomodationTypeState();
+  State<PropertyType> createState() => _PropertyTypeState();
 }
 
-class _AccomodationTypeState extends State<AccomodationType> {
+class _PropertyTypeState extends State<PropertyType> {
   int index = 0;
 
   @override

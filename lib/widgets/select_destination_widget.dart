@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-import '../screens/planning_screen.dart';
+import '../models/booking_steps.dart';
 
 class SelectDestinationWidget extends StatelessWidget {
-  const SelectDestinationWidget({
-    super.key,
-    required this.step,
-  });
+  const SelectDestinationWidget({super.key, required this.step});
 
-  final PlanningStep step;
+  final BookingSteps step;
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +15,14 @@ class SelectDestinationWidget extends StatelessWidget {
     return Card(
       clipBehavior: Clip.antiAlias,
       child: AnimatedContainer(
-        height: step == PlanningStep.destination ? 280 : 60,
+        height: step == BookingSteps.selectDestination ? 280 : 60,
         width: double.infinity,
         padding: const EdgeInsets.symmetric(
           vertical: 16.0,
           horizontal: 16.0,
         ),
-        duration: const Duration(milliseconds: 200),
-        child: step == PlanningStep.destination
+        duration: const Duration(milliseconds: 300),
+        child: step == BookingSteps.selectDestination
             ? Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -90,8 +87,8 @@ class SelectDestinationWidget extends StatelessWidget {
                   ),
                 ],
               )
-                .animate(delay: const Duration(milliseconds: 200))
-                .fadeIn(duration: const Duration(milliseconds: 200))
+                .animate(delay: const Duration(milliseconds: 300))
+                .fadeIn(duration: const Duration(milliseconds: 300))
             : Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
