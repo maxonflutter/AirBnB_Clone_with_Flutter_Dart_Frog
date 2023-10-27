@@ -1,8 +1,7 @@
-import 'package:client/screens/home_screen.dart';
-import 'package:client/screens/planning_screen.dart';
+import '../screens/home_screen.dart';
+import '../screens/planning_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'app_routes.dart';
 
 class AppRouter {
   late final GoRouter router = GoRouter(
@@ -15,39 +14,19 @@ class AppRouter {
         },
       ),
       GoRoute(
-        name: 'some-dialog',
-        path: '/some-dialog',
-        pageBuilder: (context, state) => NoTransitionPage<void>(
-          child: HeroControllerScope(
-            controller: MaterialApp.createMaterialHeroController(),
-            child: const PlanningScreen(),
-          ),
-        ),
-
-        // pageBuilder: (BuildContext context, GoRouterState state) {
-        //   // return CustomTransitionPage<void>(
-        //   //   key: state.pageKey,
-        //   //   child: const SomeDialog(),
-        //   //   barrierDismissible: true,
-        //   //   barrierColor: Colors.black38,
-        //   //   opaque: false,
-        //   //   transitionDuration: Duration.zero,
-        //   //   transitionsBuilder: (_, __, ___, Widget child) => child,
-        //   // );
-        //   return CustomTransitionPage<void>(
-        //     key: state.pageKey,
-        //     child: const SomeDialog(),
-        //     transitionDuration: const Duration(milliseconds: 000),
-        //     transitionsBuilder: (
-        //       BuildContext context,
-        //       Animation<double> animation,
-        //       Animation<double> secondaryAnimation,
-        //       Widget child,
-        //     ) {
-        //       return child;
-        //     },
-        //   );
-        // },
+        name: 'planning',
+        path: '/planning',
+        builder: (BuildContext context, GoRouterState state) {
+          return const PlanningScreen();
+        },
+        // pageBuilder: (context, state) =>
+        // NoTransitionPage<void>(
+        //   child:
+        //     HeroControllerScope(
+        //   controller: MaterialApp.createMaterialHeroController(),
+        //   child: const PlanningScreen(),
+        // ),
+        // ),
       ),
     ],
   );

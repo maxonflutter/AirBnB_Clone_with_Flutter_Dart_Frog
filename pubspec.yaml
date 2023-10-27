@@ -1,0 +1,58 @@
+name: airbnb_clone
+description: A new Flutter project.
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.1.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  flutter_animate: ^4.2.0+1
+  go_router: ^10.1.2
+  syncfusion_flutter_datepicker: ^22.2.12
+  intl: ^0.18.1
+  modal_bottom_sheet: ^2.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+
+flutter:
+  uses-material-design: true
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,5 +1,4 @@
 import 'navigation/app_router.dart';
-import 'screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
         useMaterial3: true,
       ),
       routerConfig: AppRouter().router,
