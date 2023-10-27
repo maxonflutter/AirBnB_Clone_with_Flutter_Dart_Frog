@@ -16,6 +16,8 @@ dependencies:
   syncfusion_flutter_datepicker: ^22.2.12
   intl: ^0.18.1
   modal_bottom_sheet: ^2.1.2
+  equatable: ^2.0.5
+  uuid: ^4.1.0
 
 dev_dependencies:
   flutter_test:

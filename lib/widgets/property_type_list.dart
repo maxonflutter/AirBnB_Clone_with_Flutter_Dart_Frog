@@ -13,14 +13,14 @@ class _PropertyTypeListState extends State<PropertyTypeList> {
   final List<Map<String, dynamic>> propertyTypes = [
     {'type': 'Hotel', 'icon': Icons.hotel},
     {'type': 'Apartment', 'icon': Icons.apartment},
-    {'type': 'Bed and Breakfast', 'icon': Icons.bedroom_child},
+    {'type': 'BnB', 'icon': Icons.bedroom_child},
     {'type': 'Villa', 'icon': Icons.villa},
-    // Add more property types as needed
+    {'type': 'Resort', 'icon': Icons.holiday_village},
   ];
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final size = MediaQuery.sizeOf(context);
     final textTheme = Theme.of(context).textTheme;
 
     return SizedBox(
@@ -49,7 +49,7 @@ class _PropertyTypeListState extends State<PropertyTypeList> {
                   const SizedBox(height: 2.0),
                   Text(
                     propertyTypes[index]['type'],
-                    style: textTheme.bodyText1!.copyWith(
+                    style: textTheme.bodySmall!.copyWith(
                       fontWeight: index == selectedIndex
                           ? FontWeight.bold
                           : FontWeight.normal,

@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 class Property extends Equatable {
@@ -15,7 +14,7 @@ class Property extends Equatable {
   final String mainPhotoUrl;
   final List<String> photoUrls;
 
-  Property({
+  const Property({
     required this.id,
     required this.description,
     required this.propertyType,
@@ -58,11 +57,23 @@ class Property extends Equatable {
   }
 
   @override
-  List<Object?> get props => [id, description, propertyType, roomType, pricePerNight, country, city, maxGuests, amenities, mainPhotoUrl, photoUrls];
+  List<Object?> get props => [
+        id,
+        description,
+        propertyType,
+        roomType,
+        pricePerNight,
+        country,
+        city,
+        maxGuests,
+        amenities,
+        mainPhotoUrl,
+        photoUrls
+      ];
 
   factory Property.fromJson(Map<String, dynamic> json) {
     return Property(
-      id: json['id'] ?? Uuid().v4(),
+      id: json['id'] ?? const Uuid().v4(),
       description: json['description'] ?? '',
       propertyType: json['propertyType'] ?? '',
       roomType: json['roomType'] ?? '',
@@ -70,9 +81,12 @@ class Property extends Equatable {
       country: json['country'] ?? '',
       city: json['city'] ?? '',
       maxGuests: json['maxGuests'] ?? 0,
-      amenities: json['amenities'] != null ? List<String>.from(json['amenities']) : [],
-      mainPhotoUrl: json['mainPhotoUrl'] ?? 'https://source.unsplash.com/random/?property',
-      photoUrls: json['photoUrls'] != null ? List<String>.from(json['photoUrls']) : [],
+      amenities:
+          json['amenities'] != null ? List<String>.from(json['amenities']) : [],
+      mainPhotoUrl: json['mainPhotoUrl'] ??
+          'https://source.unsplash.com/random/?property',
+      photoUrls:
+          json['photoUrls'] != null ? List<String>.from(json['photoUrls']) : [],
     );
   }
 
@@ -94,7 +108,7 @@ class Property extends Equatable {
 
   static List<Property> sampleData = [
     Property(
-      id: Uuid().v4(),
+      id: const Uuid().v4(),
       description: 'Beautiful villa with private pool',
       propertyType: 'Villa',
       roomType: 'Entire place',
@@ -102,10 +116,28 @@ class Property extends Equatable {
       country: 'Spain',
       city: 'Barcelona',
       maxGuests: 8,
-      amenities: ['Wi-Fi', 'Kitchen', 'Air conditioning'],
+      amenities: const ['Wi-Fi', 'Kitchen', 'Air conditioning'],
       mainPhotoUrl: 'https://source.unsplash.com/random/?villa',
-      photoUrls: ['https://source.unsplash.com/random/?pool', 'https://source.unsplash.com/random/?bedroom'],
+      photoUrls: const [
+        'https://source.unsplash.com/random/?pool',
+        'https://source.unsplash.com/random/?bedroom'
+      ],
     ),
-    // Add more sample data here
+    Property(
+      id: const Uuid().v4(),
+      description: 'Modern apartment in the heart of the city',
+      propertyType: 'Apartment',
+      roomType: 'Entire place',
+      pricePerNight: 100.0,
+      country: 'Spain',
+      city: 'Barcelona',
+      maxGuests: 4,
+      amenities: const ['Wi-Fi', 'Kitchen', 'Air conditioning'],
+      mainPhotoUrl: 'https://source.unsplash.com/random/?apartment',
+      photoUrls: const [
+        'https://source.unsplash.com/random/?livingroom',
+        'https://source.unsplash.com/random/?bedroom'
+      ],
+    ),
   ];
 }
