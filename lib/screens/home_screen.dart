@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../models/property.dart';
 import '../shared/colors.dart';
-import '../widgets/property_type_list.dart';
 import '../widgets/app_nav_bar.dart';
+import '../widgets/property_type_list.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -106,9 +107,9 @@ class HomeScreen extends StatelessWidget {
       ),
       body: ListView(
         padding: const EdgeInsets.all(16.0),
-        children: [1, 2, 3]
+        children: Property.sampleData
             .map(
-              (e) => Column(
+              (property) => Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
@@ -121,17 +122,18 @@ class HomeScreen extends StatelessWidget {
                     child: PageView(
                       children: [
                         Image.network(
-                          'https://images.unsplash.com/photo-1455587734955-081b22074882?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80',
+                          property.mainPhotoUrl,
                           fit: BoxFit.cover,
                         ),
-                        Image.network(
-                          'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3570&q=80',
-                          fit: BoxFit.cover,
-                        ),
-                        Image.network(
-                          'https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3571&q=80',
-                          fit: BoxFit.cover,
-                        ),
+                        property.photoUrls.isNotEmpty
+                            ? Image.network(
+                                property.photoUrls[0],
+                                fit: BoxFit.cover,
+                              )
+                            : Image.network(
+                                property.mainPhotoUrl,
+                                fit: BoxFit.cover,
+                              ),
                       ],
                     ),
                   ),
@@ -144,26 +146,21 @@ class HomeScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Dubai, UAE',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyLarge!
+                            '${property.city} • ${property.country}',
+                            style: textTheme.bodyLarge!
                                 .copyWith(fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(height: 4.0),
                           Text(
-                            'City views',
-                            style: Theme.of(context).textTheme.bodyMedium,
+                            property.amenities.take(3).join(' • '),
+                            style: textTheme.bodyMedium,
                           ),
                           const SizedBox(height: 4.0),
                           Text(
-                            '\$932 SGD total',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyLarge!
-                                .copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    decoration: TextDecoration.underline),
+                            '\$${property.pricePerNight} / night',
+                            style: textTheme.bodyLarge!.copyWith(
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.underline),
                           ),
                         ],
                       ),
