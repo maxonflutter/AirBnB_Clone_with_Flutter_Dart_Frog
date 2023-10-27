@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-class PropertyType extends StatefulWidget {
-  const PropertyType({
-    super.key,
-  });
+class PropertyTypeList extends StatefulWidget {
+  const PropertyTypeList({super.key});
 
   @override
-  State<PropertyType> createState() => _PropertyTypeState();
+  State<PropertyTypeList> createState() => _PropertyTypeListState();
 }
 
-class _PropertyTypeState extends State<PropertyType> {
+class _PropertyTypeListState extends State<PropertyTypeList> {
   int index = 0;
 
   @override
@@ -32,7 +30,7 @@ class _PropertyTypeState extends State<PropertyType> {
               left: 4.0,
               top: 4.0,
             ),
-            child: InkWell(
+            child: GestureDetector(
               onTap: () {
                 setState(() {
                   this.index = index;
@@ -45,9 +43,10 @@ class _PropertyTypeState extends State<PropertyType> {
                   Text(
                     'Anywhere',
                     style: textTheme.bodySmall!.copyWith(
-                        fontWeight: index == this.index
-                            ? FontWeight.bold
-                            : FontWeight.normal),
+                      fontWeight: index == this.index
+                          ? FontWeight.bold
+                          : FontWeight.normal,
+                    ),
                   ),
                   index == this.index
                       ? Container(

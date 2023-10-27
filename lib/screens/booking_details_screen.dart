@@ -60,51 +60,44 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
           ),
           actions: const [SizedBox(width: 48)],
         ),
-        body: LayoutBuilder(builder: (context, constraints) {
-          return SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        step = BookingSteps.selectDestination;
-                      });
-                    },
-                    child: Hero(
-                      tag: 'planning',
-                      child: SelectDestinationWidget(step: step),
-                    ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      step = BookingSteps.selectDestination;
+                    });
+                  },
+                  child: Hero(
+                    tag: 'planning',
+                    child: SelectDestinationWidget(step: step),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        step = BookingSteps.selectDate;
-                      });
-                    },
-                    child: SelectDateWidget(
-                      step: step,
-                      // 60 = destination selection collapsed height,
-                      // 32 = top/bottom padding, 16 = margin below each card
-                      height: constraints.maxHeight - 60 - 32 - 16,
-                    ),
-                  ),
-                  (step == BookingSteps.selectDate)
-                      ? const SizedBox()
-                      : GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              step = BookingSteps.selectGuests;
-                            });
-                          },
-                          child: SelectGuestsWidget(step: step),
-                        ),
-                ],
-              ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      step = BookingSteps.selectDate;
+                    });
+                  },
+                  child: SelectDateWidget(step: step),
+                ),
+                (step == BookingSteps.selectDate)
+                    ? const SizedBox()
+                    : GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            step = BookingSteps.selectGuests;
+                          });
+                        },
+                        child: SelectGuestsWidget(step: step),
+                      ),
+              ],
             ),
-          );
-        }),
+          ),
+        ),
         bottomNavigationBar: (step == BookingSteps.selectDate)
             ? null
             : BottomAppBar(

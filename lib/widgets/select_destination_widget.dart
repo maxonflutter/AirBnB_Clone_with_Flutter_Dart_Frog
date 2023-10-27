@@ -13,6 +13,7 @@ class SelectDestinationWidget extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
 
     return Card(
+      elevation: 0.0,
       clipBehavior: Clip.antiAlias,
       child: AnimatedContainer(
         height: step == BookingSteps.selectDestination ? 280 : 60,

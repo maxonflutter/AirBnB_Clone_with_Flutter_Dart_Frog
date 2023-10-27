@@ -9,18 +9,23 @@ class SelectDateWidget extends StatelessWidget {
   const SelectDateWidget({
     super.key,
     required this.step,
-    required this.height,
   });
 
   final BookingSteps step;
-  final double height;
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.sizeOf(context);
+    // 112 = app bar height + safe area top padding,
+    // 60 = destination selection collapsed height,
+    // 32 = top/bottom padding
+    // 16 = margin below each card
+    var expandedHeight = size.height - 112 - 60 - 32 - 16;
     return Card(
+      elevation: 0.0,
       clipBehavior: Clip.antiAlias,
       child: AnimatedContainer(
-          height: step == BookingSteps.selectDate ? height : 60,
+          height: step == BookingSteps.selectDate ? expandedHeight : 60,
           width: double.infinity,
           padding: const EdgeInsets.symmetric(
             vertical: 16.0,
