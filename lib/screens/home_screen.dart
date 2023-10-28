@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../models/property.dart';
-import '../shared/colors.dart';
+import '../shared/theme/colors.dart';
 import '../widgets/app_nav_bar.dart';
 import '../widgets/property_type_list.dart';
 

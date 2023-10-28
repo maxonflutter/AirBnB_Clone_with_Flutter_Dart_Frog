@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../models/booking_steps.dart';
-import '../shared/colors.dart';
+import '../shared/theme/colors.dart';
 import '../widgets/select_date_widget.dart';
 import '../widgets/select_destination_widget.dart';
 import '../widgets/select_guests_widget.dart';

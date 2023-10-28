@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:intl/intl.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../models/booking_steps.dart';
+import 'app_calendar.dart';
 
 class SelectDateWidget extends StatelessWidget {
   const SelectDateWidget({
@@ -45,10 +44,14 @@ class SelectDateWidget extends StatelessWidget {
                     ),
                     const SizedBox(height: 16.0),
                     const Row(
-                      children: [Expanded(child: SingleChoice())],
+                      children: [
+                        Expanded(
+                          child: CalendarOptionSegmentedButton(),
+                        )
+                      ],
                     ),
                     const SizedBox(height: 16.0),
-                    const Calendar(),
+                    const AppCalendar(),
                     const Spacer(),
                     const Divider(),
                     SizedBox(
@@ -118,137 +121,6 @@ class SelectDateWidget extends StatelessWidget {
                     ),
                   ],
                 )),
-    );
-  }
-}
-
-class Calendar extends StatefulWidget {
-  const Calendar({super.key});
-
-  @override
-  CalendarState createState() => CalendarState();
-}
-
-class CalendarState extends State<Calendar> {
-  String _selectedDate = '';
-  String _dateCount = '';
-  String _range = '';
-  String _rangeCount = '';
-
-  void _onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
-    setState(
-      () {
-        if (args.value is PickerDateRange) {
-          _range = '${DateFormat('dd/MM/yyyy').format(args.value.startDate)} -'
-              ' ${DateFormat('dd/MM/yyyy').format(args.value.endDate ?? args.value.startDate)}';
-        } else if (args.value is DateTime) {
-          _selectedDate = args.value.toString();
-        } else if (args.value is List<DateTime>) {
-          _dateCount = args.value.length.toString();
-        } else {
-          _rangeCount = args.value.length.toString();
-        }
-      },
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SfDateRangePicker(
-      onSelectionChanged: _onSelectionChanged,
-      selectionMode: DateRangePickerSelectionMode.range,
-      initialSelectedRange: PickerDateRange(
-        DateTime.now().subtract(const Duration(days: 4)),
-        DateTime.now().add(
-          const Duration(days: 3),
-        ),
-      ),
-    );
-  }
-}
-
-enum CalendarOptions { day, week, month, year }
-
-class SingleChoice extends StatefulWidget {
-  const SingleChoice({super.key});
-
-  @override
-  State<SingleChoice> createState() => _SingleChoiceState();
-}
-
-class _SingleChoiceState extends State<SingleChoice> {
-  CalendarOptions calendarView = CalendarOptions.day;
-
-  @override
-  Widget build(BuildContext context) {
-    return SegmentedButtonTheme(
-      data: SegmentedButtonThemeData(
-        style: ButtonStyle(
-          shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-          ),
-          padding: MaterialStateProperty.all(
-            const EdgeInsets.symmetric(
-              vertical: 8.0,
-              horizontal: 16.0,
-            ),
-          ),
-          backgroundColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.selected)) {
-                return Theme.of(context).colorScheme.secondary;
-              }
-              return Theme.of(context).colorScheme.surface;
-            },
-          ),
-          foregroundColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.selected)) {
-                return Theme.of(context).colorScheme.onSecondary;
-              }
-              return Theme.of(context).colorScheme.onSurface;
-            },
-          ),
-          textStyle: MaterialStateProperty.resolveWith<TextStyle>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.selected)) {
-                return Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      fontWeight: FontWeight.bold,
-                    );
-              }
-              return Theme.of(context).textTheme.bodyMedium!;
-            },
-          ),
-        ),
-      ),
-      child: SegmentedButton<CalendarOptions>(
-        showSelectedIcon: false,
-        segments: const <ButtonSegment<CalendarOptions>>[
-          ButtonSegment<CalendarOptions>(
-            value: CalendarOptions.day,
-            label: Text('Dates'),
-          ),
-          ButtonSegment<CalendarOptions>(
-            value: CalendarOptions.month,
-            label: Text('Months'),
-          ),
-          ButtonSegment<CalendarOptions>(
-            value: CalendarOptions.year,
-            label: Text('Flexible'),
-          ),
-        ],
-        selected: <CalendarOptions>{calendarView},
-        onSelectionChanged: (Set<CalendarOptions> newSelection) {
-          setState(() {
-            // By default there is only a single segment that can be
-            // selected at one time, so its value is always the first
-            // item in the selected set.
-            calendarView = newSelection.first;
-          });
-        },
-      ),
     );
   }
 }

@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../screens/booking_details_screen.dart';
 import '../screens/home_screen.dart';
-import '../shared/colors.dart';
+import '../shared/theme/colors.dart';
 
 class AppRouter {
   late final GoRouter router = GoRouter(
@@ -36,7 +36,6 @@ class AppRouter {
     ],
   );
 }
-
 
 // Navigator.push(
 //   context,
