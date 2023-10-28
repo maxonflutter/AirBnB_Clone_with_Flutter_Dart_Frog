@@ -1,7 +1,7 @@
-import 'package:airbnb_clone/shared/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 import 'navigation/app_router.dart';
+import 'shared/theme/colors.dart';
 
 void main() {
   runApp(const MyApp());
