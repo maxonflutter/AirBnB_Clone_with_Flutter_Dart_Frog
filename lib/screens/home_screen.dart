@@ -1,7 +1,9 @@
-import 'package:airbnb_clone/shared/theme/colors.dart';
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../models/property.dart';
+import '../shared/theme/colors.dart';
 import '../widgets/property_type_list.dart';
 
 class HomeScreen extends StatelessWidget {

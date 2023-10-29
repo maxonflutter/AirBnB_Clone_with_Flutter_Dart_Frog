@@ -18,6 +18,7 @@ dependencies:
   modal_bottom_sheet: ^2.1.2
   equatable: ^2.0.5
   uuid: ^4.1.0
+  dots_indicator: ^3.0.0
 
 dev_dependencies:
   flutter_test:
