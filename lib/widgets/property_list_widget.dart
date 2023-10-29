@@ -1,8 +1,51 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:your_project/models/property.dart';
+import 'package:equatable/equatable.dart';
 
-// Title: Property list with multiple images
+// Title: Property List Widget
+
+class Property extends Equatable {
+  final String id;
+  final String description;
+  final String propertyType;
+  final String roomType;
+  final double pricePerNight;
+  final String country;
+  final String city;
+  final int maxGuests;
+  final List<String> amenities;
+  final String mainPhotoUrl;
+  final List<String> photoUrls;
+
+  const Property({
+    required this.id,
+    required this.description,
+    required this.propertyType,
+    required this.roomType,
+    required this.pricePerNight,
+    required this.country,
+    required this.city,
+    required this.maxGuests,
+    required this.amenities,
+    required this.mainPhotoUrl,
+    required this.photoUrls,
+  });
+
+  @override
+  List<Object> get props => [
+    id,
+    description,
+    propertyType,
+    roomType,
+    pricePerNight,
+    country,
+    city,
+    maxGuests,
+    amenities,
+    mainPhotoUrl,
+    photoUrls,
+  ];
+}
 
 class PropertyListWidget extends StatelessWidget {
   final List<Property> properties;
@@ -11,160 +54,35 @@ class PropertyListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.secondary,
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: properties
-                .map(
-                  (property) => CustomCard(
-                    imageUrls: property.photoUrls,
-                    textPlaceholder: property.description,
-                    doublePlaceHolder: property.pricePerNight,
-                  ),
-                )
-                .toList(),
-          ),
-        ),
-      ),
+    return ListView.builder(
+      itemCount: properties.length,
+      itemBuilder: (context, index) {
+        final property = properties[index];
+        return PropertyCard(property: property);
+      },
     );
   }
 }
 
-class CustomCard extends StatefulWidget {
-  final List<String> imageUrls;
-  final String textPlaceholder;
-  final double doublePlaceHolder;
+class PropertyCard extends StatelessWidget {
+  final Property property;
 
-  const CustomCard({
-    Key? key,
-    required this.imageUrls,
-    required this.textPlaceholder,
-    required this.doublePlaceHolder,
-  }) : super(key: key);
-
-  @override
-  _CustomCardState createState() => _CustomCardState();
-}
-
-class _CustomCardState extends State<CustomCard> {
-  final controller = PageController();
-  var currentPage = 0;
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
+  const PropertyCard({Key? key, required this.property}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final textTheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Stack(
-          children: [
-            Container(
-              clipBehavior: Clip.antiAlias,
-              width: size.width,
-              height: size.width - 32.0,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16.0),
-              ),
-              child: PageView(
-                controller: controller,
-                onPageChanged: (value) {
-                  setState(() {
-                    currentPage = value;
-                  });
-                },
-                children: widget.imageUrls.map((imageUrl) {
-                  return Image.network(imageUrl, fit: BoxFit.cover);
-                }).toList(),
-              ),
-            ),
-            Positioned(
-              bottom: 8.0,
-              left: 0.0,
-              right: 0.0,
-              child: DotsIndicator(
-                dotsCount: widget.imageUrls.length,
-                position: currentPage.toDouble(),
-                onTap: (index) {
-                  controller.animateToPage(
-                    index,
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeIn,
-                  );
-                },
-                decorator: DotsDecorator(
-                  color: colorScheme.onSecondary,
-                  activeColor: colorScheme.secondary,
-                  size: const Size.square(8.0),
-                  activeSize: const Size(12.0, 8.0),
-                  activeShape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.0),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.textPlaceholder,
-                      style: textTheme.headline6!.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 8.0),
-                    Text(
-                      '${widget.textPlaceholder} ' * 3,
-                    ),
-                    const SizedBox(height: 8.0),
-                    Text(
-                      widget.textPlaceholder,
-                      style: textTheme.bodyText2!.copyWith(
-                        fontWeight: FontWeight.bold,
-                        decoration: TextDecoration.underline,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Row(
-                children: [
-                  const Icon(Icons.star),
-                  const SizedBox(width: 4.0),
-                  Text(
-                    widget.doublePlaceHolder.toStringAsFixed(1),
-                    style: textTheme.headline6!
-                        .copyWith(fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ],
+    return Card(
+      child: Column(
+        children: [
+          Image.network(property.mainPhotoUrl),
+          ListTile(
+            title: Text(property.description),
+            subtitle: Text('${property.country}, ${property.city}'),
           ),
-        ),
-        const SizedBox(height: 8.0),
-      ],
+          Text('Amenities: ${property.amenities.join(', ')}'),
+          Text('Price per night: ${property.pricePerNight}'),
+        ],
+      ),
     );
   }
 }
