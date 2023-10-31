@@ -107,7 +107,7 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
         child: ListView.builder(
           itemCount: Property.sampleData.length,
           itemBuilder: (context, index) {
