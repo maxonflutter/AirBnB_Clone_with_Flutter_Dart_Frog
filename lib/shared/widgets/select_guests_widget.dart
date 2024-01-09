@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-
-import '../models/booking_steps.dart';
+import 'package:models/models.dart';
 
 class SelectGuestsWidget extends StatelessWidget {
   const SelectGuestsWidget({

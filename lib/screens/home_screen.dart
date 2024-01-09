@@ -1,18 +1,17 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:models/models.dart';
 
-import '../models/property.dart';
 import '../shared/theme/colors.dart';
-import '../widgets/app_nav_bar.dart';
-import '../widgets/property_type_list.dart';
+import '../shared/widgets/app_nav_bar.dart';
+import '../shared/widgets/property_type_list.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.sizeOf(context);
     final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(

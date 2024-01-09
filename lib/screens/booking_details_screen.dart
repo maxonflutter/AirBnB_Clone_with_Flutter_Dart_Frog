@@ -2,12 +2,12 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:models/models.dart';
 
-import '../models/booking_steps.dart';
 import '../shared/theme/colors.dart';
-import '../widgets/select_date_widget.dart';
-import '../widgets/select_destination_widget.dart';
-import '../widgets/select_guests_widget.dart';
+import '../shared/widgets/select_date_widget.dart';
+import '../shared/widgets/select_destination_widget.dart';
+import '../shared/widgets/select_guests_widget.dart';
 
 class BookingDetailsScreen extends StatefulWidget {
   const BookingDetailsScreen({super.key});

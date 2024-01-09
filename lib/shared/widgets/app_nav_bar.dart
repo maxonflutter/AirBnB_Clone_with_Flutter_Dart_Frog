@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../shared/theme/colors.dart';
+import '../theme/colors.dart';
 
 class AppNavBar extends StatelessWidget {
   const AppNavBar({super.key});

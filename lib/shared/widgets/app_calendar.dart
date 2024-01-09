@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
-import '../shared/theme/colors.dart';
+import '../theme/colors.dart';
 
 enum CalendarOptions { year, month, week, day }
 

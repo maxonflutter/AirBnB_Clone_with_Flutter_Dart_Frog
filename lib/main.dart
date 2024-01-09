@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'navigation/app_router.dart';
+import 'shared/navigation/app_router.dart';
 import 'shared/theme/colors.dart';
 
 void main() {

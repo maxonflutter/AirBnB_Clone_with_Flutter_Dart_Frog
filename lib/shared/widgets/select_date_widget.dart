@@ -1,9 +1,9 @@
-import 'package:airbnb_clone/shared/theme/colors.dart';
-import 'package:airbnb_clone/widgets/app_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:models/models.dart';
 
-import '../models/booking_steps.dart';
+import '../theme/colors.dart';
+import 'app_calendar.dart';
 
 class SelectDateWidget extends StatelessWidget {
   const SelectDateWidget({super.key, required this.step});

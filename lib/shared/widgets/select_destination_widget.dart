@@ -1,6 +1,6 @@
-import 'package:airbnb_clone/models/booking_steps.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:models/models.dart';
 
 class SelectDestinationWidget extends StatelessWidget {
   const SelectDestinationWidget({super.key, required this.step});
